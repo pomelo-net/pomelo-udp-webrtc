@@ -1,6 +1,6 @@
 import hrtime from "./hrtime";
 import SampleSet from "./sampling";
-import RTTCalculator from "./rtt";
+import { RTTCalculator } from "./rtt";
 
 const POMELO_PROTOCOL_CLOCK_RECENT_OFFSETS_SIZE = 10;
 

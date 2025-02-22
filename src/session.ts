@@ -312,10 +312,14 @@ export class SessionImpl implements Session {
             this.channels[channelIndex]?.setIncomingDataChannel(dc);
         }
 
-        this.connectTimeout = setTimeout(() => {
-            this.close();
-            this.onConnectResult.emit(ConnectResult.TIMED_OUT);
-        }, timeout * 1000);
+        if (timeout > 0) {
+            this.connectTimeout = setTimeout(() => {
+                this.close();
+                this.onConnectResult.emit(ConnectResult.TIMED_OUT);
+            }, timeout * 1000);
+        } else {
+            console.warn("Timeout is not positive: " + timeout);
+        }
     }
 
     send(channelIndex: number, message: Message): boolean {

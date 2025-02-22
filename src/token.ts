@@ -127,9 +127,9 @@ export function decodeTokenPublic(connectToken: Uint8Array): TokenPublicInfo {
     const createTimestamp = payload.readUint64();
     const expireTimestamp = payload.readUint64();
     const connectTokenNonce = payload.read(POMELO_CONNECT_TOKEN_NONCE_BYTES);
-    const timeout = payload.readInt32();
     const encryptedPrivateConnectTokenData =
         payload.read(POMELO_ENCRYPTED_PRIVATE_CONNECT_TOKEN_BYTES);
+    const timeout = payload.readInt32();
     const serverAddresses = decodeServerAddresses(payload);
     const clientToServerKey = payload.read(POMELO_KEY_BYTES);
     const serverToClientKey = payload.read(POMELO_KEY_BYTES);

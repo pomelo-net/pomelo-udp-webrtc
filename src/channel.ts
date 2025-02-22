@@ -2,6 +2,7 @@ import Message from "./message";
 import Signal from "./utils/signal";
 import { Statistic } from "./statistic";
 import { ChannelMode } from "./enums";
+import Payload from "./utils/payload";
 
 
 /* -------------------------------------------------------------------------- */
@@ -31,14 +32,9 @@ export default interface Channel {
 /* -------------------------------------------------------------------------- */
 
 // Just a trick to access payload of message
-class OutgoingMessage extends Message {
-    /**
-     * Incoming message
-     */
-    pack(): Uint8Array {
-        return this.payload.pack();
-    }
-}
+interface OutgoingMessage {
+    payload: Payload;
+};
 
 
 /**
@@ -117,7 +113,7 @@ export class ChannelImpl implements Channel {
         if (!this.active) return false;
 
         if (message instanceof Message) {
-            const buffer = (message as OutgoingMessage).pack();
+            const buffer = (<unknown>message as OutgoingMessage).payload.pack();
             this.outgoingDataChannel.send(buffer);
             this.statistic.webrtc.totalSentBytes += BigInt(buffer.byteLength);
         } else {

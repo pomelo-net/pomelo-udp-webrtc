@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/pomelo.js",
   "types": "dist/pomelo.d.ts",
-  "repository": "git@github.com:kienhg96/pomelo-udp-webrtc.git",
+  "repository": "git@github.com:pomelo-net/pomelo-udp-webrtc.git",
   "author": "Kien Hoang <kienhg96@gmail.com>",
   "license": "MIT",
   "devDependencies": {

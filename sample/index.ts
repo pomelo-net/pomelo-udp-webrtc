@@ -1,8 +1,11 @@
-import { ChannelMode } from "../src/channel";
+import { ChannelMode } from "../src/enums";
 import Message from "../src/message";
 import Session from "../src/session";
 import Socket from "../src/socket";
-import { TOKEN } from "./token";
+
+
+const SERVICE_HOST = "127.0.0.1";
+const SERVICE_PORT = 8889;
 
 
 async function main() {
@@ -28,12 +31,15 @@ async function main() {
             console.log(`On received: ${session.id}`);
             console.log(`Message: ${message.size()}`);
             const value = message.readInt32();
-            console.log("Message content: ", value);
+            console.log("Message content:", value);
         }
     });
 
     console.log("Start connecting...");
-    const result = await socket.connect(TOKEN);
+    const fetchRet = await fetch(`http://${SERVICE_HOST}:${SERVICE_PORT}`);
+    const token = await fetchRet.text();
+
+    const result = await socket.connect(token);
     console.log("Connect Result =", result);
 }
 
